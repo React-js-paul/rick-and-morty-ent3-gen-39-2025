@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./App.css";
 import useFetch from "./hooks/useFetch";
@@ -12,11 +12,21 @@ function App() {
 
   useEffect(() => {
     getLocation();
-  }, []);
+  }, [locationId]);
+
+  const handleSbmit = (e) => {
+    e.preventDefault();
+    setLocationId(inputId.current.value.trim());
+  };
+  const inputId = useRef();
 
   return (
     <div>
       <h1>Esta es mi locacion actual</h1>
+      <form onSubmit={handleSbmit}>
+        <input type="number" ref={inputId} />
+        <button>Search</button>
+      </form>
       <LocationInfo location={location} />
       <section>
         {location?.residents.map((url) => (
