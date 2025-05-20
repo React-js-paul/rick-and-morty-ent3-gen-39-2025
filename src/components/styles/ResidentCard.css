@@ -1,0 +1,186 @@
+.resident {
+  width: 100%;
+  max-width: 19em;
+  background-color: var(--secondary--color);
+  border-radius: 0.9em;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px 1px white;
+  }
+}
+
+.resident__header {
+  position: relative;
+  .resident__status-container {
+    position: absolute;
+    top: 2em;
+    background-color: var(--secondary--color);
+    color: #fff;
+    min-width: 7em;
+    padding: 0.3em 1em;
+    border-radius: 0 0.5em 0.5em 0;
+    gap: 0.8em;
+
+    .resident__status-circle {
+      width: 1em;
+      background-color: #aaa;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+    .resident__status {
+      font-size: 0.9em;
+      font-weight: 500;
+    }
+    .Alive {
+      background-color: #008000;
+    }
+    .Dead {
+      background-color: #ff0000;
+    }
+  }
+}
+
+.resident__body {
+  color: #fff;
+  padding: 1.5em 1.5em 2em;
+
+  .resident__name {
+    text-align: center;
+    font-size: 1.1em;
+    font-family: var(--font-alternative);
+  }
+  .resident__hr {
+    margin: 1em 0;
+    border-color: #999499;
+  }
+  .resident__list {
+    gap: 0.8em;
+    .resident__item {
+      gap: 0.2em;
+      .resident__label {
+        font-weight: 500;
+        font-size: 1em;
+        color: #999;
+        padding-left: 1em;
+      }
+
+      .resident__value {
+        font-family: var(--font-alternative);
+        font-size: 0.9em;
+      }
+    }
+  }
+}
+
+/*
+
+CSS  
+├── Selectores  
+│   ├── Universales (*)  
+│   ├── Elementos (tag)  
+│   ├── Clases (.)  
+│   ├── IDs (#)  
+│   ├── Atributos ([atributo])  
+│   ├── Descendentes (A B)  
+│   ├── Hijos directos (A > B)  
+│   ├── Hermanos adyacentes (A + B)  
+│   ├── Hermanos generales (A ~ B)  
+│   ├── Pseudo-clases (:hover, :nth-child, :focus, etc.)  
+│   ├── Pseudo-elementos (::before, ::after, ::selection, etc.)  
+│   ├── Grupos de selectores (A, B, C)  
+│   ├── Selectores avanzados (is(), where(), not())  
+│  
+├── Propiedades  
+│   ├── Box Model  
+│   │   ├── width, height  
+│   │   ├── margin, padding  
+│   │   ├── border, border-radius  
+│   │   ├── outline  
+│   │   ├── box-shadow  
+│   ├── Display y posicionamiento  
+│   │   ├── display (block, inline, flex, grid, etc.)  
+│   │   ├── position (static, relative, absolute, fixed, sticky)  
+│   │   ├── top, right, bottom, left  
+│   │   ├── overflow  
+│   │   ├── visibility  
+│   ├── Tipografía  
+│   │   ├── font-family  
+│   │   ├── font-size  
+│   │   ├── font-weight  
+│   │   ├── text-align  
+│   │   ├── line-height  
+│   │   ├── letter-spacing  
+│   │   ├── word-spacing  
+│   ├── Colores y fondos  
+│   │   ├── color  
+│   │   ├── background-color  
+│   │   ├── background-image  
+│   │   ├── background-repeat, background-size, background-position  
+│   │   ├── opacity  
+│   ├── Bordes y sombras  
+│   │   ├── border, border-width, border-style, border-color  
+│   │   ├── box-shadow  
+│   ├── Listas  
+│   │   ├── list-style-type  
+│   │   ├── list-style-position  
+│   │   ├── list-style-image  
+│   ├── Tablas  
+│   │   ├── border-collapse  
+│   │   ├── border-spacing  
+│   │   ├── empty-cells  
+│   ├── Transiciones y animaciones  
+│   │   ├── transition-property, transition-duration, transition-timing-function  
+│   │   ├── animation-name, animation-duration, animation-timing-function  
+│   ├── Transformaciones  
+│   │   ├── transform (translate, rotate, scale, skew)  
+│   │   ├── perspective  
+│   ├── Variables  
+│   │   ├── var(--nombre-variable)  
+│   ├── Filtros  
+│   │   ├── filter (blur, brightness, contrast, drop-shadow, grayscale)  
+│  
+├── Unidades de medida  
+│   ├── Absolutas (px, pt, cm, mm, in)  
+│   ├── Relativas (%, em, rem, vw, vh, vmin, vmax)  
+│  
+├── Funciones CSS  
+│   ├── calc()  
+│   ├── clamp()  
+│   ├── min(), max()  
+│   ├── rgb(), hsl(), rgba(), hsla()  
+│  
+├── Media Queries  
+│   ├── @media (responsive design)  
+│   ├── @supports (detecta si el navegador soporta una característica)  
+│   ├── @container (CSS Containment)  
+│  
+├── Grillas y Flexbox  
+│   ├── display: flex  
+│   │   ├── flex-direction  
+│   │   ├── flex-wrap  
+│   │   ├── justify-content  
+│   │   ├── align-items  
+│   │   ├── gap  
+│   ├── display: grid  
+│   │   ├── grid-template-columns, grid-template-rows  
+│   │   ├── grid-auto-flow  
+│   │   ├── gap  
+│   │   ├── justify-items, align-items  
+│  
+├── Métodos de integración  
+│   ├── CSS en línea (style="")  
+│   ├── CSS en archivos externos (.css)  
+│   ├── CSS en etiquetas `<style>`  
+│  
+├── Modern CSS (Herramientas avanzadas)  
+│   ├── CSS Variables  
+│   ├── CSS Houdini  
+│   ├── CSS Grid y Subgrid  
+│   ├── Container Queries  
+│   ├── Logical Properties  
+
+
+*/

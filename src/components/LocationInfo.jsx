@@ -1,24 +1,23 @@
+import "./styles/LocationInfo.css";
+
 const LocationInfo = ({ location }) => {
   return (
-    <section>
-      <div>
-        <h2> {location?.name} </h2>
-        <ul>
-          <li>
-            <span>Type:</span>
-            <span>{location?.type} </span>
-          </li>
-          <li>
-            <span>Dimension:</span>
-            <span>{location?.dimension} </span>
-          </li>
-          <li>
-            <span>Population:</span>
-            <span>{location?.residents.length} </span>
-          </li>
-        </ul>
-      </div>
-      ;
+    <section className="location">
+      <h2 className="location__name"> {location?.name} </h2>
+      <ul className="location__list flex-container">
+        <li className="location__item grid-container">
+          <span className="location__label">Type:</span>
+          <span className="location__value">{location?.type} </span>
+        </li>
+        <li className="location__item grid-container">
+          <span className="location__label">Dimension:</span>
+          <span>{location?.dimension} </span>
+        </li>
+        <li className="location__item grid-container">
+          <span className="location__label">Population:</span>
+          <span>{location?.residents.length} </span>
+        </li>
+      </ul>
     </section>
   );
 };

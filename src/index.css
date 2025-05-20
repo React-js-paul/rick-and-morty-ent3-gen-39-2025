@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --color-natural-rick: #04a904;
+  --primary-color: #05292e;
+  --secondary--color: #062226;
+  --font-base: "Roboto", sans-serif;
+  --font-alternative: "shadows Into Light", cursive;
+}
+
+html {
+  font-family: var(--font-base);
+  background-color: var(--primary-color);
+  box-sizing: border-box;
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0%;
+  }
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  hr {
+    margin: 0%;
+  }
+  img {
+    width: 100%;
+    display: block;
+  }
+  input,
+  bottom {
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+  }
+  input {
+    outline: none;
+  }
+}
+
+/*Reusable classes*/
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.grid-container {
+  display: grid;
+}
