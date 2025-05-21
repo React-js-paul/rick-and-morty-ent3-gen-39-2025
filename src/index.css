@@ -12,6 +12,90 @@ html {
   font-family: var(--font-base);
   background-color: var(--primary-color);
   box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0%;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+hr {
+  margin: 0%;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+input,
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+}
+
+/* Reusable classes */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.grid-container {
+  display: grid;
+}
+
+/* ✅ Estilos responsive básicos */
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ✅ Media queries para pantallas pequeñas */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+/*
+@import url("https://fonts.googleapis.com/css2?family=Boldonse&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --color-natural-rick: #04a904;
+  --primary-color: #05292e;
+  --secondary--color: #062226;
+  --font-base: "Roboto", sans-serif;
+  --font-alternative: "shadows Into Light", cursive;
+}
+
+html {
+  font-family: var(--font-base);
+  background-color: var(--primary-color);
+  box-sizing: border-box;
   *,
   *::before,
   *::after {
@@ -44,7 +128,7 @@ html {
   }
 }
 
-/*Reusable classes*/
+/*Reusable classes
 .flex-container {
   display: flex;
   justify-content: center;
@@ -53,3 +137,5 @@ html {
 .grid-container {
   display: grid;
 }
+
+*/

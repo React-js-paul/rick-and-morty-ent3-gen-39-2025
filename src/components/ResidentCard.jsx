@@ -11,7 +11,7 @@ const ResidentCard = ({ url }) => {
   }, []);
   console.log(resident);
   return (
-    <article className="resident">
+    <article className={`resident paul ${resident?.status}`}>
       {isLoading ? (
         <h1>Lodings</h1>
       ) : (

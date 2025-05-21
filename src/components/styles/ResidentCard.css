@@ -4,12 +4,12 @@
   background-color: var(--secondary--color);
   border-radius: 0.9em;
   overflow: hidden;
-  transition: all 0.2s ease;
 
-  &:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 10px 1px white;
-  }
+  transition: all 0.2s ease;
+}
+
+.paul {
+  cursor: pointer;
 }
 
 .resident__header {
@@ -36,6 +36,10 @@
     }
     .Alive {
       background-color: #008000;
+      &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 10px 1px #ff0000;
+      }
     }
     .Dead {
       background-color: #ff0000;
