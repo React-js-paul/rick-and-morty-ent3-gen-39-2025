@@ -26,15 +26,17 @@ function App() {
   console.log(locations);
   const handleSbmit = (e) => {
     e.preventDefault();
-    const inputValue = inputName.current.value.thim();
+    const inputValue = inputName.current.value.trim();
     const selectedLocation = locations.find(
       (location) => location.name.toLowerCase() == inputValue.toLowerCase()
     );
 
     if (inputValue) {
       setLocationId(selectedLocation ? selectedLocation.id : null);
+      setErrorMessage(selectedLocation ? ' ' : 'No location found with that name!')
+    } else {
+      setErrorMessage(inputName ? '' : 'You must put a location name')
     }
-
     {
       /*if (inputId.current.value) {setLocationId(inputId.current.value.trim()); }*/
     }
@@ -59,33 +61,35 @@ function App() {
             type="text"
             placeholder="search Location name"
             ref={inputName}
-            list="location"
+            list="locations"
           />
           <datalist id="locations">
             {isLoadingLocations ? (
               <option> Loading.....</option>
             ) : (
-              location?.map((location) => (
-                <option value={locations.name} key={locations.id}></option>
+              locations?.map((location) => (
+                <option value={location.name} key={location.id}></option>
               ))
             )}
           </datalist>
           <button className="form__btn">Search</button>
         </form>
         {isLoading ? (
-          <h1>Loading..</h1>
-        ) : hasError ? (
-          <h1>X! sorry! you must enter numbers</h1>
-        ) : (
-          <>
-            <LocationInfo location={location} />
-            <section className="cards__container flex-container">
-              {location?.residents.map((url) => (
-                <ResidentCard key={url} url={url} />
-              ))}
-            </section>
-          </>
-        )}
+          <h1>Loading...</h1>
+        ) :
+          errorMessage ? (
+            <h1>X {errorMessage} </h1>
+          ) :
+            (
+              <>
+                <LocationInfo location={location} />
+                <section className="cards__container flex-container">
+                  {location?.residents.map((url) => (
+                    <ResidentCard key={url} url={url} />
+                  ))}
+                </section>
+              </>
+            )}
       </section>
     </div>
   );
