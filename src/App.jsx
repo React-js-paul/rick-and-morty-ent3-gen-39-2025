@@ -41,26 +41,59 @@ function App() {
   // 🟢 Referencia para acceder al valor del input
   const inputName = useRef();
 
-  // ⚡ Manejador de eventos para el formulario
-  const handleSbmit = (e) => {
-    e.preventDefault();
-
-    // 🔍 Obtiene el valor ingresado por el usuario en el input
+  // ⚡ Nueva función para manejar la búsqueda, tanto automática como manual
+  const performSearch = () => {
     const inputValue = inputName.current.value.trim();
+    setErrorMessage(""); // Limpia cualquier mensaje de error previo
 
-    // 🔍 Busca la ubicación cuyo nombre coincida con lo ingresado
+    if (!inputValue) {
+      setErrorMessage("You must enter a location name.");
+      return;
+    }
+
+    // Busca la ubicación cuyo nombre coincida con lo ingresado
     const selectedLocation = locations.find(
-      (location) => location.name.toLowerCase() === inputValue.toLowerCase()
+      (loc) => loc.name.toLowerCase() === inputValue.toLowerCase()
     );
 
-    // 📌 Si se ingresó algo, actualiza el estado con la ubicación encontrada
-    if (inputValue) {
-      setLocationId(selectedLocation ? selectedLocation.id : null);
-      setErrorMessage(
-        selectedLocation ? "" : "No location found with that name!"
-      );
+    if (selectedLocation) {
+      setLocationId(selectedLocation.id);
+      // Opcional: podrías limpiar el input después de una búsqueda exitosa
+      // inputName.current.value = "";
     } else {
-      setErrorMessage("You must put a location name");
+      setErrorMessage("No location found with that name!");
+    }
+  };
+
+  // ⚡ Manejador de eventos para el formulario (lo mantenemos para la búsqueda manual si el usuario presiona Enter o el botón)
+  const handleSbmit = (e) => {
+    e.preventDefault(); // Evita que se recargue la página
+    performSearch(); // Llama a la nueva función de búsqueda
+  };
+
+  // ⚡ Manejador de eventos para el input (para la búsqueda automática)
+  const handleInputChange = () => {
+    const inputValue = inputName.current.value.trim();
+
+    // Solo busca automáticamente si el input no está vacío
+    if (inputValue) {
+      // Busca si el valor actual del input coincide exactamente con un nombre de ubicación
+      const matchingLocation = locations.find(
+        (loc) => loc.name.toLowerCase() === inputValue.toLowerCase()
+      );
+
+      if (matchingLocation) {
+        // Si hay una coincidencia exacta, dispara la búsqueda
+        setLocationId(matchingLocation.id);
+        setErrorMessage(""); // Limpia el error si había uno
+      } else {
+        // Si no hay una coincidencia exacta, pero el usuario está escribiendo,
+        // puedes decidir si quieres mostrar un error o simplemente no hacer nada hasta que coincida.
+        // Por ahora, lo dejamos sin mensaje de error si no hay match, ya que el usuario puede seguir escribiendo.
+        setErrorMessage(""); // Evita que el mensaje de error se quede si el usuario está escribiendo
+      }
+    } else {
+      setErrorMessage(""); // Limpia el error si el input está vacío
     }
   };
 
@@ -81,13 +114,16 @@ function App() {
             placeholder="Search Location Name"
             ref={inputName}
             list="locations"
+            onChange={handleInputChange} // <<-- ¡Añadimos este evento!
           />
+          <button className="form__button">x</button>
 
           {/* 📃 Lista de opciones automáticas basadas en ubicaciones disponibles */}
           <datalist id="locations">
             {isLoadingLocations ? (
               <option>Loading...</option>
             ) : (
+              // Asegúrate de que `locations` no sea undefined antes de mapear
               locations?.map((location) => (
                 <option value={location.name} key={location.id}></option>
               ))

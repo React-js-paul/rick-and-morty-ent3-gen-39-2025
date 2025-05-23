@@ -28,11 +28,28 @@
     border-radius: 0.5em 0 0 0.5em;
     width: 15em;
   }
+  .form__button {
+    margin-right: 0.5em;
+    width: 17px;
+    height: 17px;
+    transition: 0.4s ease;
+    opacity: 0.5;
+    display: inline-block; /* O 'block' */
+    color: #fff;
+
+    background-color: #04a904;
+    border-radius: 50%;
+    &:hover {
+      scale: 1.2;
+      opacity: 1;
+    }
+  }
   .form__btn {
     padding: 0.5em 0.8em;
     background-color: #04a904;
     color: #fff;
-    border-radius: 0 0.5em 0.5em 0;
+    border-radius: 0 0.5em 0.5em 1;
+
     transition: backgroud-color 0.5s ease;
     &:hover {
       background-color: var(--secondary-color);
