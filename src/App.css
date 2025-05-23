@@ -1,4 +1,5 @@
 .app {
+  display: flex;
   flex-direction: column;
   gap: 1em;
   .app__body {
@@ -21,6 +22,10 @@
 }
 
 .form {
+  display: flex; /* Hace que los elementos se coloquen en línea */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: center;
+
   margin-bottom: 1.5em;
   text-align: center;
   .form__input {
@@ -28,29 +33,43 @@
     border-radius: 0.5em 0 0 0.5em;
     width: 15em;
   }
+  .form__div {
+    background-color: #fff;
+    padding: 0.39em;
+  }
   .form__button {
     margin-right: 0.5em;
-    width: 17px;
+    display: flex; /* Asegura alineación interna */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 17px; /* Ampliar un poco el botón para mejor ajuste */
     height: 17px;
-    transition: 0.4s ease;
-    opacity: 0.5;
-    display: inline-block; /* O 'block' */
-    color: #fff;
-
-    background-color: #04a904;
     border-radius: 50%;
+    background-color: rgba(4, 169, 4, 0.5); /* Color verde con transparencia */
+    border: none;
+    cursor: pointer;
+    padding: 0;
     &:hover {
       scale: 1.2;
-      opacity: 1;
+      background-color: rgba(4, 169, 4, 1);
+    }
+    .button__icon {
+      font-size: 8px; /* Ajusta el tamaño de la "X" */
+      font-weight: bold;
+      color: #fff; /* Mantiene el color visible */
+      display: flex; /* Asegura alineación */
+      align-items: center;
+      justify-content: center;
     }
   }
+
   .form__btn {
     padding: 0.5em 0.8em;
     background-color: #04a904;
     color: #fff;
     border-radius: 0 0.5em 0.5em 1;
 
-    transition: backgroud-color 0.5s ease;
+    transition: background-color 0.5s ease;
     &:hover {
       background-color: var(--secondary-color);
     }
