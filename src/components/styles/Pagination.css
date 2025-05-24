@@ -1,0 +1,40 @@
+.pagination {
+    gap: 2em;
+    display: flex;
+    /* Activa Flexbox */
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    width: 60%;
+    text-align: center;
+    margin: 0em;
+    padding: 0.1em;
+
+    .pagination__btn {
+        text-align: center;
+        font-weight: 500;
+        color: var(--color-natural-rick);
+        text-align: center;
+        font-size: 0.9em;
+        font-family: var(--font-alternative);
+    }
+
+    .pagination__index {
+        text-align: center;
+        font-weight: 500;
+        color: var(--color-natural-rick);
+        text-align: center;
+        font-size: 1.2em;
+        font-family: var(--font-alternative);
+    }
+
+    .pagination__btn-sig {
+        text-align: center;
+        font-weight: 500;
+        color: var(--color-natural-rick);
+        text-align: center;
+        font-size: 0.9em;
+        font-family: var(--font-alternative);
+    }
+}

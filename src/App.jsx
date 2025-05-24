@@ -6,11 +6,12 @@ import getRandomNumber from "./hooks/getRandomNumber";
 import LocationInfo from "./components/LocationInfo";
 import ResidentCard from "./components/ResidentCard";
 import getNumbers from "./helpers/getNumbers";
+import Pagination from "./components/Pagination"; // ⬅ Importamos el componente de paginación
 
 function App() {
   const [locationId, setLocationId] = useState(getRandomNumber(126));
   const [errorMessage, setErrorMessage] = useState("");
-  const [showClearButton, setShowClearButton] = useState(false); // 🟢 Nuevo estado
+  const [showClearButton, setShowClearButton] = useState(false);
 
   const safeNumbers = getNumbers() || 1;
   const url = `https://rickandmortyapi.com/api/location/${locationId}`;
@@ -56,7 +57,7 @@ function App() {
 
   const handleInputChange = () => {
     const inputValue = inputName.current.value.trim();
-    setShowClearButton(inputValue.length > 0); // 🟢 Actualiza visibilidad del botón
+    setShowClearButton(inputValue.length > 0);
 
     if (inputValue) {
       const matchingLocation = locations.find(
@@ -74,6 +75,16 @@ function App() {
     }
   };
 
+  // ******************************* PAGINATION *******************************
+  const [currentPage, setCurrentPage] = useState(1);
+  const residentsPerPage = 8;
+
+  // Calculamos los índices para cortar la lista según la página actual
+  const startIndex = (currentPage - 1) * residentsPerPage;
+  const endIndex = startIndex + residentsPerPage;
+  const residentsToShow = location?.residents.slice(startIndex, endIndex);
+  // ******************************* PAGINATION *******************************
+
   return (
     <div className="app flex-container">
       <header className="app__hero">
@@ -88,15 +99,15 @@ function App() {
             placeholder="Search Location Name"
             ref={inputName}
             list="locations"
-            onChange={handleInputChange} // 🔄 Modificado para controlar el botón
+            onChange={handleInputChange}
           />
-          {showClearButton && ( // 🟢 Renderización condicional del botón
+          {showClearButton && (
             <div className="form__div">
               <button
                 className="form__button"
                 onClick={() => {
-                  inputName.current.value = ""; // 🟢 Borra el contenido del input
-                  setShowClearButton(false); // 🟢 Oculta el botón de limpiar
+                  inputName.current.value = "";
+                  setShowClearButton(false);
                 }}
               >
                 <span className="button__icon">✖</span>
@@ -123,9 +134,18 @@ function App() {
           <>
             <LocationInfo location={location} />
             <section className="cards__container flex-container">
-              {location?.residents.map((url) => (
+              {residentsToShow.map((url) => (
                 <ResidentCard key={url} url={url} />
               ))}
+
+              {/* 📄 Controles de paginación */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(
+                  location?.residents.length / residentsPerPage
+                )}
+                onPageChange={setCurrentPage}
+              />
             </section>
           </>
         )}
