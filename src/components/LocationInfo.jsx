@@ -15,7 +15,7 @@ const LocationInfo = ({ location }) => {
         </li>
         <li className="location__item grid-container">
           <span className="location__label">Population:</span>
-          <span>{location?.residents.length} </span>
+          <span>{location?.residents?.length ?? 0} </span>
         </li>
       </ul>
     </section>

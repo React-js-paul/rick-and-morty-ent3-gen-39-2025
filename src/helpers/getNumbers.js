@@ -1,5 +1,3 @@
-import React from "react";
-
 const getNumbers = () => {
   const element = [];
   for (let i = 1; i <= 126; i++) {

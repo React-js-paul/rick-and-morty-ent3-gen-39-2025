@@ -7,30 +7,27 @@
   border-radius: 1em;
   margin: 0 auto 2em;
   transition: scale 0.5em ease;
-
-  &:hover {
-    scale: 0.95;
-  }
-
-  .location__name {
-    text-align: center;
-    font-weight: 500;
-    color: var(--color-natural-rick);
-    margin-bottom: 0.7em;
-  }
-
-  .location__list {
-    justify-items: space-between;
-    gap: 2em;
-    .location__item {
-      justify-items: center;
-      .location__label {
-        font-size: 0.9em;
-        color: #999;
-      }
-      .location__value {
-        font-style: 0.95em;
-      }
-    }
-  }
+}
+.location:hover {
+  scale: 0.95;
+}
+.location__name {
+  text-align: center;
+  font-weight: 500;
+  color: var(--color-natural-rick);
+  margin-bottom: 0.7em;
+}
+.location__list {
+  justify-items: space-between;
+  gap: 2em;
+}
+.location__item {
+  justify-items: center;
+}
+.location__label {
+  font-size: 0.9em;
+  color: #999;
+}
+.location__value {
+  font-style: 0.95em;
 }

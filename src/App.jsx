@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useMemo, useCallback } from "react";
 
 import "./App.css";
 import useFetch from "./hooks/useFetch";
@@ -16,21 +16,14 @@ function App() {
   const safeNumbers = getNumbers() || 1;
   const url = `https://rickandmortyapi.com/api/location/${locationId}`;
 
-  const [location, getLocation, hasError, isLoading] = useFetch(url);
-  const [locations, getLocations, hasErrorLocations, isLoadingLocations] =
-    useFetch(`https://rickandmortyapi.com/api/location/${safeNumbers}`);
-
-  useEffect(() => {
-    getLocation();
-  }, [locationId]);
-
-  useEffect(() => {
-    getLocations();
-  }, []);
+  const [location, hasError, isLoading] = useFetch(url);
+  const [locations, hasErrorLocations, isLoadingLocations] = useFetch(
+    `https://rickandmortyapi.com/api/location/${safeNumbers}`
+  );
 
   const inputName = useRef();
 
-  const performSearch = () => {
+  const performSearch = useCallback(() => {
     const inputValue = inputName.current.value.trim();
     setErrorMessage("");
 
@@ -39,7 +32,7 @@ function App() {
       return;
     }
 
-    const selectedLocation = locations.find(
+    const selectedLocation = locations?.find(
       (loc) => loc.name.toLowerCase() === inputValue.toLowerCase()
     );
 
@@ -48,7 +41,7 @@ function App() {
     } else {
       setErrorMessage("No location found with that name!");
     }
-  };
+  }, [locations]);
 
   const handleSbmit = (e) => {
     e.preventDefault();
@@ -60,7 +53,7 @@ function App() {
     setShowClearButton(inputValue.length > 0);
 
     if (inputValue) {
-      const matchingLocation = locations.find(
+      const matchingLocation = locations?.find(
         (loc) => loc.name.toLowerCase() === inputValue.toLowerCase()
       );
 
@@ -79,10 +72,18 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const residentsPerPage = 8;
 
-  // Calculamos los índices para cortar la lista según la página actual
-  const startIndex = (currentPage - 1) * residentsPerPage;
-  const endIndex = startIndex + residentsPerPage;
-  const residentsToShow = location?.residents.slice(startIndex, endIndex);
+  const residentsToShow = useMemo(() => {
+    if (!location?.residents) return [];
+    const startIndex = (currentPage - 1) * residentsPerPage;
+    const endIndex = startIndex + residentsPerPage;
+    return location.residents.slice(startIndex, endIndex);
+  }, [location, currentPage]);
+
+  const totalPages = useMemo(() => {
+    return location?.residents
+      ? Math.ceil(location.residents.length / residentsPerPage)
+      : 1;
+  }, [location]);
   // ******************************* PAGINATION *******************************
 
   return (
@@ -127,7 +128,10 @@ function App() {
         </form>
 
         {isLoading ? (
-          <h1>Loading...</h1>
+          <div className="loader__container">
+            {/* Animamos directamente la imagen para evitar un div extra */}
+            <img className="loader" src="/vite.png" alt="loader" />
+          </div>
         ) : errorMessage ? (
           <h1>X {errorMessage}</h1>
         ) : (
@@ -141,9 +145,7 @@ function App() {
               {/* 📄 Controles de paginación */}
               <Pagination
                 currentPage={currentPage}
-                totalPages={Math.ceil(
-                  location?.residents.length / residentsPerPage
-                )}
+                totalPages={totalPages}
                 onPageChange={setCurrentPage}
               />
             </section>

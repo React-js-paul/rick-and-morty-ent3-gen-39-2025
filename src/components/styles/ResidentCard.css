@@ -14,69 +14,76 @@
 
 .resident__header {
   position: relative;
-  .resident__status-container {
-    position: absolute;
-    top: 2em;
-    background-color: var(--secondary--color);
-    color: #fff;
-    min-width: 7em;
-    padding: 0.3em 1em;
-    border-radius: 0 0.5em 0.5em 0;
-    gap: 0.8em;
+}
 
-    .resident__status-circle {
-      width: 1em;
-      background-color: #aaa;
-      aspect-ratio: 1;
-      border-radius: 50%;
-    }
-    .resident__status {
-      font-size: 0.9em;
-      font-weight: 500;
-    }
-    .Alive {
-      background-color: #008000;
-      &:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 10px 1px #ff0000;
-      }
-    }
-    .Dead {
-      background-color: #ff0000;
-    }
-  }
+.resident__status-container {
+  position: absolute;
+  top: 2em;
+  background-color: var(--secondary--color);
+  color: #fff;
+  min-width: 7em;
+  padding: 0.3em 1em;
+  border-radius: 0 0.5em 0.5em 0;
+  gap: 0.8em;
+}
+
+.resident__status-circle {
+  width: 1em;
+  background-color: #aaa;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.resident__status {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.resident__status-circle.Alive {
+  background-color: #008000;
+}
+.resident__status-circle.Alive:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px 1px #ff0000;
+}
+.resident__status-circle.Dead {
+  background-color: #ff0000;
 }
 
 .resident__body {
   color: #fff;
   padding: 1.5em 1.5em 2em;
+}
 
-  .resident__name {
-    text-align: center;
-    font-size: 1.1em;
-    font-family: var(--font-alternative);
-  }
-  .resident__hr {
-    margin: 1em 0;
-    border-color: #999499;
-  }
-  .resident__list {
-    gap: 0.8em;
-    .resident__item {
-      gap: 0.2em;
-      .resident__label {
-        font-weight: 500;
-        font-size: 1em;
-        color: #999;
-        padding-left: 1em;
-      }
+.resident__name {
+  text-align: center;
+  font-size: 1.1em;
+  font-family: var(--font-alternative);
+}
 
-      .resident__value {
-        font-family: var(--font-alternative);
-        font-size: 0.9em;
-      }
-    }
-  }
+.resident__hr {
+  margin: 1em 0;
+  border-color: #999499;
+}
+
+.resident__list {
+  gap: 0.8em;
+}
+
+.resident__item {
+  gap: 0.2em;
+}
+
+.resident__label {
+  font-weight: 500;
+  font-size: 1em;
+  color: #999;
+  padding-left: 1em;
+}
+
+.resident__value {
+  font-family: var(--font-alternative);
+  font-size: 0.9em;
 }
 
 /*

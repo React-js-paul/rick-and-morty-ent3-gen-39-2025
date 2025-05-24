@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import "./styles/ResidentCard.css";
-//el costom hook son patrones de diseño
 
-const ResidentCard = ({ url }) => {
-  const [resident, getResident, hasError, isLoading] = useFetch(url);
+const ResidentCard = React.memo(({ url }) => {
+  const [resident, hasError, isLoading] = useFetch(url);
 
   useEffect(() => {
-    getResident();
-  }, []);
-  console.log(resident);
+    // No es necesario llamar a getResident, el hook ya lo hace automáticamente
+  }, [url]);
+
   return (
     <article className={`resident paul ${resident?.status}`}>
       {isLoading ? (
-        <h1>Lodings</h1>
+        <h1>Loading...</h1>
       ) : (
         <>
           <header className="resident__header">
@@ -24,7 +23,7 @@ const ResidentCard = ({ url }) => {
             />
             <div className="resident__status-container flex-container">
               <div
-                className={`resident__status-circle ${resident?.status}`} /// aquei es un poco curioso porque hisimos una clase dinamina y enviamos el valor que viene de la  api para usarlo en el css osea se envio los datos via class
+                className={`resident__status-circle ${resident?.status}`}
               ></div>
               <div className="resident_status">{resident?.status}</div>
             </div>
@@ -56,6 +55,6 @@ const ResidentCard = ({ url }) => {
       )}
     </article>
   );
-};
+});
 
 export default ResidentCard;
